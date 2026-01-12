@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Fragment } from '../types';
-import { X, Quote, MapPin, ChevronRight, ChevronLeft, Film, Feather, Star, AlignLeft } from 'lucide-react';
+import { X, Quote, MapPin, ChevronRight, ChevronLeft, Film, Feather, Star, AlignLeft, Sun, Moon } from 'lucide-react';
 import { Oracle } from './Oracle';
 
 interface ManifestationProps {
@@ -200,6 +200,150 @@ export const Manifestation: React.FC<ManifestationProps> = ({ fragment, onClose 
       );
   };
 
+  // --- NEW: ALCYONE (CYCLE OF LIGHT) ---
+  const AlcyoneLayout = ({ content }: { content: string[] }) => {
+    const [page, setPage] = useState(0);
+    
+    // Gradient map based on the 5 sections (indices approximate content chunks)
+    // 0: Intro (Light)
+    // 1: Structure (Light/Green)
+    // 2: June (Green/Gold)
+    // 3: July (Bright Azure/White)
+    // 4: High Summer (Intense Yellow/Orange)
+    // 5: Decline (Orange/Bronze)
+    // 6: September (Purple/Blue)
+    // 7: Conclusion (Ethereal Grey/Silver)
+    
+    const atmospheres = [
+        "bg-gradient-to-br from-amber-100 to-yellow-200 text-amber-900", // Intro
+        "bg-gradient-to-br from-yellow-50 to-lime-100 text-emerald-900", // Structure
+        "bg-gradient-to-b from-lime-200 to-green-300 text-green-950", // June
+        "bg-gradient-to-t from-cyan-100 to-white text-cyan-900", // July (Panism)
+        "bg-gradient-to-br from-orange-400 to-red-500 text-white", // High Summer
+        "bg-gradient-to-br from-orange-300 to-amber-700 text-amber-950", // Decline
+        "bg-gradient-to-b from-indigo-300 to-purple-800 text-indigo-100", // Sept
+        "bg-gradient-to-br from-gray-200 to-slate-400 text-slate-900", // Conclusion
+    ];
+
+    const currentAtmosphere = atmospheres[page] || atmospheres[0];
+
+    // Sun position changes
+    const sunPositions = [
+        "top-10 left-10 scale-100 bg-yellow-400", // Intro
+        "top-20 left-1/4 scale-110 bg-yellow-300", 
+        "top-10 left-1/2 scale-125 bg-yellow-200", // June
+        "top-0 left-1/2 scale-150 bg-white blur-xl", // July (Zenith)
+        "top-20 right-1/4 scale-125 bg-orange-500", // High Summer
+        "top-1/2 right-10 scale-100 bg-red-600", // Decline
+        "bottom-10 right-1/2 scale-75 bg-purple-300", // Sept
+        "bottom-[-10%] left-[-10%] scale-150 bg-gray-100 opacity-50", // Conclusion
+    ];
+
+    return (
+        <div className={`w-full h-full transition-colors duration-1000 ease-in-out relative overflow-hidden flex flex-col items-center justify-center ${currentAtmosphere}`}>
+             
+             {/* The Celestial Body */}
+             <div className={`absolute w-64 h-64 rounded-full blur-[60px] transition-all duration-1000 ease-in-out opacity-60 z-0 pointer-events-none ${sunPositions[page] || sunPositions[0]}`}></div>
+             
+             {/* Heat Haze Overlay */}
+             <div className="absolute inset-0 z-10 opacity-30 bg-[url('https://www.transparenttextures.com/patterns/noise.png')] mix-blend-overlay"></div>
+
+             {/* Content Container - Glassmorphism */}
+             <div className="relative z-20 w-full max-w-5xl h-[80vh] flex flex-col md:flex-row gap-8 p-6 md:p-12 items-center">
+                 
+                 {/* Text Block - Floating Effect */}
+                 <div className="w-full md:w-2/3 h-full flex flex-col justify-center bg-white/20 backdrop-blur-md border border-white/30 p-8 md:p-12 rounded-lg shadow-xl animate-float transition-all duration-500">
+                    <div className="flex-1 overflow-y-auto custom-scrollbar">
+                         <div key={page} className="animate-blur-in">
+                            <h2 className="font-monumental text-4xl mb-6 opacity-50 uppercase tracking-widest">
+                                {page === 0 ? "Prologo" : 
+                                 page === 1 ? "Struttura" :
+                                 page === 2 ? "Giugno" :
+                                 page === 3 ? "Luglio" :
+                                 page === 4 ? "Agosto" :
+                                 page === 5 ? "Declino" :
+                                 page === 6 ? "Settembre" : "Epilogo"}
+                            </h2>
+                            <div className="font-prose text-xl md:text-3xl leading-relaxed drop-shadow-sm">
+                                <FormattedText text={content[page]} />
+                            </div>
+                         </div>
+                    </div>
+                    
+                    {/* Navigation Bar inside the glass card */}
+                    <div className="mt-8 pt-6 border-t border-current/20 flex justify-between items-center font-monumental text-xs tracking-widest uppercase">
+                        <button 
+                            onClick={() => setPage(p => Math.max(0, p - 1))} 
+                            disabled={page === 0}
+                            className="hover:opacity-100 opacity-60 disabled:opacity-20 flex items-center gap-2 transition-all hover:-translate-x-1"
+                        >
+                            <ChevronLeft size={16} /> Precedente
+                        </button>
+                        
+                        <div className="flex gap-2">
+                            {content.map((_, i) => (
+                                <div key={i} className={`h-1 transition-all duration-500 ${i === page ? 'w-8 bg-current opacity-100' : 'w-2 bg-current opacity-30'}`} />
+                            ))}
+                        </div>
+
+                        <button 
+                            onClick={() => setPage(p => Math.min(content.length - 1, p + 1))} 
+                            disabled={page === content.length - 1}
+                            className="hover:opacity-100 opacity-60 disabled:opacity-20 flex items-center gap-2 transition-all hover:translate-x-1"
+                        >
+                            Successivo <ChevronRight size={16} /> 
+                        </button>
+                    </div>
+                 </div>
+
+                 {/* Decorative Right Side - The Season Label */}
+                 <div className="hidden md:flex w-1/3 h-full flex-col justify-center items-center text-center">
+                     <div className="font-archaic text-9xl opacity-20 transform rotate-90 whitespace-nowrap origin-center select-none">
+                        ALCYONE
+                     </div>
+                 </div>
+             </div>
+             
+             <style>{`
+                @keyframes float {
+                    0% { transform: translateY(0px); }
+                    50% { transform: translateY(-10px); }
+                    100% { transform: translateY(0px); }
+                }
+                .animate-float {
+                    animation: float 6s ease-in-out infinite;
+                }
+             `}</style>
+        </div>
+    );
+  };
+
+  // --- NEW: SERA FIESOLANA (TWILIGHT GRADIENT) ---
+  const SeraLayout = ({ content }: { content: string[] }) => {
+    return (
+        <div className="w-full h-full bg-gradient-to-b from-[#1a237e] via-[#311b92] to-black text-white overflow-y-auto custom-scrollbar relative">
+             {/* Stars */}
+             <div className="fixed inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-30 pointer-events-none"></div>
+             <div className="fixed top-8 right-8 text-white/20">
+                 <Moon size={64} />
+             </div>
+
+             <div className="max-w-4xl mx-auto p-8 md:p-24 space-y-12">
+                 <h1 className="font-handwriting text-6xl md:text-8xl text-center text-indigo-200 opacity-80 mb-12">La Sera Fiesolana</h1>
+                 
+                 {content.map((block, idx) => (
+                     <div key={idx} className="font-prose text-xl md:text-2xl leading-[2.2] text-indigo-100/90 pl-0 md:pl-8 border-l-0 md:border-l border-indigo-500/30">
+                         {/* Use FormattedText to handle the lists and headers in the analysis */}
+                         <FormattedText text={block} />
+                     </div>
+                 ))}
+
+                 <div className="h-24"></div>
+             </div>
+        </div>
+    );
+  };
+
   // --- 4. FORESTA (PIOGGIA) - Improved Columns & Poetry Format ---
   const PioggiaLayout = ({ content }: { content: string[] }) => {
       return (
@@ -382,35 +526,41 @@ export const Manifestation: React.FC<ManifestationProps> = ({ fragment, onClose 
   // --- 8. MAUSOLEO (VITTORIALE/LOCATION) ---
   const VittorialeLayout = ({ fragment }: { fragment: Fragment }) => {
     return (
-        <div className="w-full h-full relative bg-stone-900 overflow-y-auto custom-scrollbar">
-            {/* Hero Image */}
-            <div className="h-[50vh] md:h-[60vh] w-full relative">
-                <img src={fragment.image} className="w-full h-full object-cover grayscale opacity-60" />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-stone-900"></div>
-                <div className="absolute bottom-0 left-0 p-8 md:p-12">
-                    <MapPin className="text-gold-dust w-8 h-8 md:w-12 md:h-12 mb-4 animate-bounce" />
-                    <h1 className="font-monumental text-4xl md:text-8xl text-stone-100 leading-none">{fragment.label}</h1>
+        <div className="w-full h-full relative bg-stone-900 overflow-y-auto custom-scrollbar flex flex-col">
+             {/* Header Section */}
+             <div className="w-full relative shrink-0">
+                <div className="h-[40vh] w-full relative overflow-hidden">
+                    <img src={fragment.image} className="w-full h-full object-cover grayscale opacity-50 fixed-bg" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-stone-900/60 to-stone-900"></div>
+                    <div className="absolute bottom-0 left-0 p-8 md:p-16 max-w-4xl">
+                         <div className="flex items-center gap-4 text-gold-dust mb-4">
+                             <MapPin size={32} />
+                             <span className="font-monumental tracking-[0.3em] text-sm">GARDONE RIVIERA</span>
+                         </div>
+                         <h1 className="font-monumental text-5xl md:text-7xl text-stone-100 leading-none mb-6">{fragment.label}</h1>
+                         <div className="font-prose text-xl md:text-2xl text-stone-300 leading-relaxed border-l-2 border-gold-dust pl-6">
+                            <FormattedText text={Array.isArray(fragment.content) ? fragment.content[0] : fragment.content} />
+                         </div>
+                    </div>
                 </div>
-            </div>
+             </div>
 
-            <div className="max-w-6xl mx-auto px-6 md:px-8 py-12 md:py-16 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
-                <div className="font-prose text-xl md:text-2xl text-stone-300 leading-loose">
-                    <span className="float-left text-6xl text-gold-dust font-monumental mr-4 mt-[-10px]">I</span>
-                    <FormattedText text={Array.isArray(fragment.content) ? fragment.content[0] : fragment.content} />
-                </div>
-                
-                <div className="space-y-8">
+             {/* Gallery Grid (Masonry Style) */}
+             <div className="flex-1 bg-stone-900 p-4 md:p-8">
+                 <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8 max-w-7xl mx-auto">
                     {fragment.gallery?.map((item, i) => (
-                        <div key={i} className="group relative overflow-hidden border border-stone-700">
-                            <img src={item.image} className="w-full h-64 object-cover grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105" />
-                            <div className="absolute bottom-0 left-0 w-full bg-black/80 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform">
-                                <h3 className="font-monumental text-gold-dust">{item.title}</h3>
-                                <p className="text-stone-400 text-sm">{item.description}</p>
-                            </div>
+                        <div key={i} className="break-inside-avoid group relative overflow-hidden border border-stone-800 hover:border-gold-dust/50 transition-colors duration-500 bg-black">
+                            <img 
+                                src={item.image} 
+                                alt={item.title}
+                                loading="lazy"
+                                className="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 transform group-hover:scale-105" 
+                            />
                         </div>
                     ))}
-                </div>
-            </div>
+                 </div>
+                 <div className="h-24"></div> {/* Bottom padding */}
+             </div>
         </div>
     );
   };
@@ -424,6 +574,8 @@ export const Manifestation: React.FC<ManifestationProps> = ({ fragment, onClose 
         case 'prodigio': return <GenesiLayout content={content} />;
         case 'piacere': return <PiacereLayout content={content} />;
         case 'duse': return <DuseLayout content={content} />;
+        case 'alcyone': return <AlcyoneLayout content={content} />; // NEW
+        case 'sera': return <SeraLayout content={content} />;       // NEW
         case 'pioggia': return <PioggiaLayout content={content} />;
         case 'esilio': return <EsilioLayout content={content} />;
         case 'notturno': return <NotturnoLayout content={content} />;

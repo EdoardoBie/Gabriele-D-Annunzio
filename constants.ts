@@ -4,12 +4,35 @@ import { Fragment } from "./types";
 // 1. La Genesi (Top Left) 
 // 2. Il Piacere (Top Center-Left)
 // 3. La Divina (Top Center-Right) 
-// 4. La Pioggia nel Pineto (Top Right)
-// 5. Esilio & Cinema (Mid Right) 
-// 6. Il Notturno (Mid Center) 
-// 7. L'Impresa (Bottom Left) 
-// 8. Il Vittoriale (Bottom Center) 
-// 9. Oracle (Bottom Right)
+// 4. Alcyone (NEW)
+// 5. La Sera Fiesolana (NEW)
+// 6. La Pioggia nel Pineto (Top Right)
+// 7. Esilio & Cinema (Mid Right) 
+// 8. Il Notturno (Mid Center) 
+// 9. L'Impresa (Bottom Left) 
+// 10. Il Vittoriale (Bottom Center) 
+// 11. Oracle (Bottom Right)
+
+const DRIVE_BASE = "https://lh3.googleusercontent.com/d/";
+const VITTORIALE_IDS = [
+    "10wa9zELDqh_w6MBju_Miax4BqUEM7wdH", "110OGjoIvD50obXdjmyRwhTYAmuWNR-hj", "122hhg_H_cI37cFJkBZAVX8N2GuCo0d6Y", 
+    "12FJkcP2ijNDbkqWm1JtpwNf1rBmbd_pz", "12TjsKKiL4cltFuSJEZf9dePXAp2oASgz", "12U9qWxgmCp2ymbZKOWSkxKpA-VdZcqC2",
+    "13dsMIzEWPQHjidZHmFDAE1tWKpwYc29N", "14mpZ1OR16aLnvF4reGLuCbexOg5cegBa", "14yoz0byS4FXWNKZrZBVR72f2JfimqeU3",
+    "15E6E6WezynsECS6b8a7AiUSEO7E0OVub", "17IpY0V8JVdXHR8RiOu4PSf_TvxlSbZx0", "1A2wEtQ4Lz9IAbxiu2xTZU1At-dhv439d",
+    "1AyTNPCwnUr_qYYgpVVcuof3etZe-4iSM", "1CNxCTtVojz6sCY_NTkWbjshLUblmvLnv", "1GRb_qjC1xWCWNXjpqSMt8EiBZp4KdkNX",
+    "1KAH8w9bn46NHzlVkg5CMixNWihaplqSg", "1LaOcDITNPokL9WurghbdICbcrNv4S8I-", "1N4Zd-SVyfpS87fvTGbCUjGxNbfYxKCG3",
+    "1NQa5lBbVs6YDILpRHEIVuOYC5jl3Hoxq", "1OdOmrwmtkQ3tWXTrEcO454Wv08PdyqTm", "1QSVBSJfbmYQ2jf4asvXCEC61QvTYHVQN",
+    "1Qys91ji-ZdRZA9-fbGAtbCvDV_ZFfrtN", "1SkvLb2k7asI96PrH6-Wzgaxu3FOnBzCA", "1VUOxmKeWomtunbek4NpA1yOPpu5Ua5Xu",
+    "1WbX5MrIwr8a9AaEaaxPKvYNp-xV2SJGG", "1WotgGUEqXhvZeGIF30hMPQyqoc9nIADl", "1Xot85wClJGvV1WG20YUSLdGDDDlXDrJR",
+    "1_MmzeVAA1He4ArDJQ5orDeBh0P0vVWB-", "1amYjIHqLUzWsVzgFpvucnzYRvW3LAzQn", "1aqFbTJyYNF2u9pfdNkMIyFiBUE7Tl5q3",
+    "1ay8VaFH8CcqUuf3g5CW14GW2IZNzODF8", "1bMj5crwfiaeiL15xN0JOR5OopubQpysw", "1fYgPxIOVXQBQkIQZOf1j5StYN6urQRBB",
+    "1hmhWOTMI4UUmyx25Ro7slIWXHlrTbEUJ", "1iZXK5CWPwEqF8oeUtqgKyjG8HXWf3q4Y", "1iu7p45wo6gw8ZOMyl7iG16ytvFJ1ocsE",
+    "1k0yw9uRlcYsDrZSy83pQ75LO5KNxPync", "1mEMbvkzHADQU8ij-vL2pdBPgwwNwTjWa", "1no2Eiz4DoR3PegwvNM0nW0wdUdFhQ4wI",
+    "1p4iKoMXReBIgQBQVP8JWgdt-wrwg61N9", "1r6QoArZ-T4PVbxICbqdVrCOCnnSC-jO1", "1rLI9VdX280FtAgDjZp2zMQYx2ffkZliw",
+    "1tSb1TQjTCNLmfdZzQ_GrzgH3pwaB3Q-h", "1tnbuxoye4S_Ozgyi9CWS9f5EqdXNqr7V", "1uVPmxYYixyX4H3nbyLIWvlKOcFqb3kxl",
+    "1vqrHpkoo6-95HE-kcKnhneAhdS05FT5X", "1w-C_ngtK70HY2M4Vfxbz_OcJqjk1wXv-", "1wRWG9afuxIb4Vy65HxdMdFC3G2fjtvXz",
+    "1wThF3f0iFA3y-isu_6TTdQEZATiruk6x", "1wpJeJgNuVX1GI1evtYNcb5RpL8ryezqm", "1zm3_SLzizb27G6KClyK-GClAFdZvruyl"
+];
 
 export const FRAGMENTS: Fragment[] = [
   // --- 1. LA GENESI (FULL BIO) ---
@@ -78,6 +101,73 @@ export const FRAGMENTS: Fragment[] = [
       "4. Il crepuscolo della \"Divina\"\nLa pubblicazione de Il fuoco segnò l'inizio della fine della loro storia, che si concluse definitivamente intorno al 1904. Eleonora, stremata dai debiti e dalla salute delicata, si ritirò dalle scene nel 1909, per poi tornarvi nel 1921 a causa di necessità economiche. Morì nel 1924, ironia della sorte, proprio in una stanza d'albergo a Pittsburgh (USA), lontana dall'Italia ma consacrata per sempre come il simbolo del teatro moderno."
     ],
     image: "https://picsum.photos/seed/duse_actress/500/600?grayscale",
+  },
+
+  // --- NEW: ALCYONE (COMPLETE TEXT SPLIT) ---
+  {
+    id: 'alcyone',
+    label: 'Alcyone',
+    type: 'WORK',
+    era: '1903',
+    x: 75, y: 15,
+    scale: 1.15,
+    rotation: -10,
+    meta: "L'Estate Infinita",
+    content: [
+        // Slide 1: Intro
+        "Alcyone è il terzo libro in cui D’Annunzio esalta l’estate nel suo significato simbolico. Per il poeta, questa stagione rappresenta la fase di massima pienezza dell’esistenza umana e coincide con l’apice dell’energia creativa e dell’ispirazione artistica.",
+        // Slide 2: Structure
+        "Struttura e temi di Alcyone\n\nL’opera è articolata in cinque parti, per un totale di 88 componimenti. Ogni sezione possiede una propria fisionomia tematica ed è legata a un preciso momento del ciclo stagionale e a uno specifico scenario naturale, cui corrisponde uno stato emotivo distinto. Il libro si apre con La tregua, testo di passaggio tra Alcyone e gli altri due libri delle Laudi. Se questi ultimi celebravano l’azione eroica e civile del superuomo, Alcyone ne rappresenta invece la sospensione: una pausa di abbandono alla natura. Il nucleo tematico centrale è infatti il panismo, cioè la fusione dell’uomo con il mondo naturale.",
+        // Slide 3: Section 1 (June)
+        "La prima sezione è collocata nel paesaggio rurale tra Fiesole e Firenze, nel mese di giugno, quando la primavera sfuma nell’estate. I testi assumono la forma di lodi pagane dedicate a luoghi, piante, momenti della giornata e alla stagione nascente; la natura diventa oggetto di celebrazione, come accade ne La sera fiesolana.",
+        // Slide 4: Section 2 (July)
+        "La seconda sezione si svolge in Versilia, nel pieno dell’estate, durante il mese di luglio. Qui emerge con forza il rapporto panico tra uomo e natura: l’individuo tende a dissolversi in essa, perdendo la propria identità. Esemplari in questo senso sono La pioggia nel pineto e Le stirpi canore.",
+        // Slide 5: Section 3 (High Summer/Superuomo)
+        "Anche la terza sezione è dedicata all’estate nella sua massima intensità, ma al panismo si intreccia in modo più marcato la riflessione sul superuomo.",
+        // Slide 6: Section 4 (Decline)
+        "La quarta sezione segna il culmine dell’estate e, insieme, l’apparizione dei primi segnali autunnali. Al declino della stagione corrisponde la crisi dei miti della ricchezza e del potere; l’unico valore che resiste è quello della poesia e dell’arte.",
+        // Slide 7: Section 5 (September/End)
+        "La quinta e ultima sezione è ambientata nel mese di settembre, quando l’estate volge al termine. Prevalgono i temi del ripiegamento interiore, dello scorrere inesorabile del tempo e della fine imminente della stagione. Il libro si chiude con Il commiato, poesia che saluta i luoghi versiliani teatro dell’esperienza estiva e contiene una dedica a Pascoli, in parallelo con il saluto a Carducci presente in Maia.",
+        // Slide 8: Conclusion
+        "Alcyone è considerato il capolavoro di D’Annunzio e la manifestazione più complessa e raffinata della sua poesia. Più che una molteplicità di temi, l’opera presenta una continua modulazione degli stessi nuclei concettuali. La trama è minimale: il poeta intende restituire sensazioni e stati d’animo vissuti durante l’estate, soprattutto in ambiente marino. Le figure femminili, spesso riconducibili a Eleonora Duse, appaiono evanescenti e simboliche, assimilabili alle figure del mito. Le esperienze del protagonista si sovrappongono a modelli classici, mentre i paesaggi toscani vengono trasfigurati fino ad assumere i tratti di una Grecia arcaica e mitica."
+    ],
+    image: "https://picsum.photos/seed/sun/600/400?grayscale"
+  },
+
+  // --- NEW: LA SERA FIESOLANA (UPDATED WITH POEM & PARAPHRASE) ---
+  {
+    id: 'sera',
+    label: 'La Sera Fiesolana',
+    type: 'POEM',
+    era: 'Giugno 1899',
+    x: 68, y: 35,
+    scale: 1.05,
+    rotation: 5,
+    meta: "Analisi dell'Opera",
+    content: [
+        // --- POEM TEXT (Cleaned of footnotes) ---
+        "Fresche le mie parole ne la sera\nti sien come il fruscìo che fan le foglie\ndel gelso ne la man di chi le coglie\nsilenzioso e ancor s’attarda a l’opra lenta\nsu l’alta scala che s’annera\ncontro il fusto che s’inargenta\ncon le sue rame spoglie\nmentre la Luna è prossima a le soglie\ncerule e par che innanzi a sé distenda un velo\nove il nostro sogno si giace\ne par che la campagna già si senta\nda lei sommersa nel notturno gelo\ne da lei beva la sperata pace\nsenza vederla.\n\nLaudata sii pel tuo viso di perla,\no Sera, e pe’ tuoi grandi umidi occhi ove si tace\nl’acqua del cielo!",
+        
+        "Dolci le mie parole ne la sera\nti sien come la pioggia che bruiva\ntepida e fuggitiva,\ncommiato lacrimoso de la primavera,\nsu i gelsi e su gli olmi e su le viti\ne su i pini dai novelli rosei diti\nche giocano con l’aura che si perde,\ne su ’l grano che non è biondo ancóra\ne non è verde,\ne su ’l fieno che già patì la falce\ne trascolora,\ne su gli olivi, su i fratelli olivi\nche fan di santità pallidi i clivi\ne sorridenti.\n\nLaudata sii per le tue vesti aulenti,\no Sera, e pel cinto che ti cinge come il salce\nil fien che odora!",
+
+        "Io ti dirò verso quali reami\nd’amor ci chiami il fiume, le cui fonti\neterne a l’ombra de gli antichi rami\nparlano nel mistero sacro dei monti;\ne ti dirò per qual segreto\nle colline su i limpidi orizzonti\ns’incùrvino come labbra che un divieto\nchiuda, e perché la volontà di dire\nle faccia belle\noltre ogni uman desire\ne nel silenzio lor sempre novelle\nconsolatrici, sì che pare\nche ogni sera l’anima le possa amare\nd’amor più forte.\n\nLaudata sii per la tua pura morte,\no Sera, e per l’attesa che in te fa palpitare\nle prime stelle!",
+
+        // --- PARAPHRASE ---
+        "Parafrasi:\nLa mia poesia, limpida come acqua, sia per te\nnella sera come il fruscio delle foglie\ndi un gelso sulle mani di chi le coglie\nin silenzio e che ancor si attarda in questo\ncompito paziente, [mentre sta] su un’alta scala\nche diventa buia contro il fusto color argento\ncon i suoi rami senza più foglie\nmentre la Luna si affaccia sull’orizzonte\nazzurrino, e sembra che stenda di fronte a sé\nun velo dove riposa il nostro ideale\ne sembra che la campagna nel gelo della notte\nsi senta ricoperta da lei [la Luna]\ne da lei beva il refrigerio a lungo invocato,\nbenché ancora non riesca a scorgerla.\nO Sera, sii lodata per il tuo viso perlaceo,\ne per i tuoi grandi occhi umidi dove si ferma,\nsilenziosa, la pioggia del cielo!",
+        
+        "Dolce sia per te il mio canto serale\ncome la pioggia che picchietta\ntiepida e rapida,\ncome un mesto addio della primavera,\nsu gelsi, olmi e viti,\nsui pini con le pigne novelle\nche scherzano con il vento che cala,\ne sui campi di grano non ancora maturo\nné ancora verde,\ne sul fieno che è già stato mietuto\ne che cambia il suo colore,\ne sugli olivi, fraterni,\nche imbiancano - come se fossero santi -\ne rendono liete e felici le colline.\nO Sera, sii lodata per le tue vesti che, mandano\nprofumi, e per la cintura che ti cinge\ncome il salice che lega il fieno odoroso!",
+        
+        "Ti rivelerò a quali regni di amore\nci condurrà il fiume Arno, le cui sorgenti\nimmutabili ci richiamano all’ombra dei rami antichi\nnel mistero inviolabile delle colline fiesolane;\ne ti svelerò la verità\nper cui le colline si piegano sull’orizzonte chiaro\ncome delle labbra vincolate da un divieto,\ne [ti dirò] perché la mia rivelazione poetica\nrenda tutto ciò splendido\noltre ogni desiderio umano\n[e perché] nel silenzio [faccia che tutto ciò sia]\ncostante motivo di consolazione e pace, così che pare\nche ogni sera la nostra anima possa\namare sempre più questa bellezza.\nO sera, sii lodata per la tu morte pura ed intatta,\ne per l’attesa che, in te, fa risplendere\nle prime stelle che sorgono!",
+
+        // --- EXISTING ANALYSIS (Preserved for completeness) ---
+        "1. Struttura e Metrica\nLa poesia è composta da tre strofe di quattordici versi di varia lunghezza (endecasillabi, novenari, settenari e quinari). Ogni strofa è seguita da un ritornello di tre versi liberi, che ricalca lo stile delle laudi francescane.\n• Il richiamo a San Francesco: Il ritornello inizia sempre con l'invocazione \"Laudata sii\", un chiaro omaggio al Cantico delle creature di San Francesco d’Assisi, ma qui il sacro viene trasposto in una dimensione totalmente profana ed estetizzante.\n• Legame musicale: Il primo verso di ogni ritornello rima con l'ultimo della strofa precedente, creando una catena sonora ininterrotta.",
+        "2. Analisi delle Strofe e Nuclei Tematici\nPrima Strofa: La Natività della Luna\nIl poeta si rivolge a una misteriosa presenza femminile (identificata spesso con Ermione/Eleonora Duse) augurandole che le sue parole siano \"fresche\" come il rumore delle foglie di gelso raccolte silenziosamente.\n• L’apparizione lunare: Viene descritta la luna che sta per sorgere (\"prossima a le soglie cerule\"); la sua luce è paragonata a un velo disteso che dona frescura e la \"sperata pace\" alla campagna prima ancora di essere vista.\n• Analisi: Domina la sensazione visiva del chiarore argenteo (\"s'inargenta\") e quella tattile della freschezza.",
+        "Seconda Strofa: Il Commiato della Primavera\nL'attenzione si sposta sul ricordo di una pioggia recente, definita come un \"commiato lacrimoso\" della primavera che cede il passo all'estate.\n• Il catalogo vegetale: Il poeta elenca minuziosamente le piante bagnate: gelsi, olmi, viti e i pini dai \"novelli rosei diti\" (le nuove gemme paragonate alle dita dei bimbi).\n• Umanizzazione: Gli olivi sono definiti \"fratelli\" e assumono un aspetto di \"santità\" e gioia, quasi stessero sorridendo sulle colline.",
+        "Terza Strofa: Il Mistero delle Colline\nL'ultima parte introduce il tema del segreto della natura. Il poeta promette alla donna di rivelarle verso quali \"reami d'amor\" ci inviti il fiume Arno e quale sia il segreto delle colline.\n• Colline come labbra: Attraverso una potente personificazione, il profilo delle colline sull'orizzonte è paragonato a labbra chiuse da un divieto, che vorrebbero rivelare un segreto ma non possono farlo. Questo silenzio le rende belle \"oltre ogni uman desire\".",
+        "3. I Ritornelli (Le Laudi alla Sera)\nI tre ritornelli celebrano la Sera personificandola come una divinità femminile:\n1. Viso di perla e occhi umidi: La sera ha un volto pallido e occhi grandi dove \"si tace l’acqua del cielo\" (riferimento alle pozze di rugiada o pioggia).\n2. Vesti aulenti e cinto: Viene celebrata per i suoi profumi (il fieno falciato) e per l'orizzonte che la cinge come una cintura.\n3. La pura morte: Si loda lo svanire della sera nella notte (\"pura morte\"), momento in cui iniziano a palpitare le prime stelle.",
+        "4. Aspetti Stilistici e Poetici\n• Il Panismo: Non c'è un distacco tra uomo e natura; l'io del poeta si compenetra nelle sensazioni naturali, e la natura a sua volta si antropomorfizza (assume tratti umani).\n• Musicalità e Sinestesia: D'Annunzio usa un linguaggio prezioso e ricercato (es. bruiva, aulenti, cerule) e accosta sensazioni diverse tra loro. Ad esempio, il fruscìo (uditivo) è definito \"fresco\" (tattile), creando una sinestesia che avvolge il lettore in un'esperienza sensoriale totale.\n• La parola come magia: Come in altre liriche di Alcyone, la parola non serve solo a descrivere, ma diventa una formula magica per svelare l'essenza segreta della realtà."
+    ],
+    image: "https://picsum.photos/seed/sun/600/400?grayscale"
   },
 
   // --- 4. LA PIOGGIA NEL PINETO (UPDATED) ---
@@ -207,19 +297,12 @@ export const FRAGMENTS: Fragment[] = [
     rotation: 0,
     meta: "Mausoleo",
     content: "La prigione dorata. Una casa che è un labirinto di simboli.",
-    image: "https://picsum.photos/seed/vittoriale/800/600?grayscale",
-    gallery: [
-      {
-        title: "La Prioria",
-        description: "L'abitazione del poeta, avvolta nella penombra.",
-        image: "https://picsum.photos/seed/prioria/800/500?grayscale"
-      },
-      {
-        title: "La Nave Puglia",
-        description: "La prua della nave incastonata nella collina.",
-        image: "https://picsum.photos/seed/navepuglia/800/500?grayscale"
-      }
-    ],
+    image: "https://lh3.googleusercontent.com/d/10wa9zELDqh_w6MBju_Miax4BqUEM7wdH", // Main image
+    gallery: VITTORIALE_IDS.map((id, index) => ({
+        title: `Visione n.${index + 1}`,
+        description: "Frammento della Prioria o dei Giardini.",
+        image: `${DRIVE_BASE}${id}`
+    })),
     analysis: {
         title: "Immortalità",
         paragraphs: [
