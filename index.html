@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>L'Imaginifico | Archivio Mnestico</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=IM+Fell+English+SC&family=Monsieur+La+Doulaise&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'void': '#080808',
+              'gold-dust': '#C5A059',
+              'blood-dried': '#4A0E12',
+              'parchment': '#E6DCC8',
+              'ghost': 'rgba(230, 220, 200, 0.1)',
+            },
+            fontFamily: {
+              monumental: ['"Cinzel"', 'serif'],
+              prose: ['"Cormorant Garamond"', 'serif'],
+              handwriting: ['"Monsieur La Doulaise"', 'cursive'],
+              archaic: ['"IM Fell English SC"', 'serif'],
+            },
+            backgroundImage: {
+              'noise-pattern': "url('https://www.transparenttextures.com/patterns/stardust.png')",
+            },
+            animation: {
+              'drift': 'drift 20s ease-in-out infinite alternate',
+              'pulse-slow': 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'flicker': 'flicker 4s infinite',
+              'blur-in': 'blurIn 1.5s ease-out forwards',
+            },
+            keyframes: {
+              drift: {
+                '0%': { transform: 'translate(0, 0) rotate(0deg)' },
+                '100%': { transform: 'translate(20px, -20px) rotate(2deg)' },
+              },
+              flicker: {
+                '0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100%': { opacity: 0.99 },
+                '20%, 21.999%, 63%, 63.999%, 65%, 69.999%': { opacity: 0.4 },
+              },
+              blurIn: {
+                '0%': { filter: 'blur(20px)', opacity: 0 },
+                '100%': { filter: 'blur(0)', opacity: 1 },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #050505;
+        color: #E6DCC8;
+        overflow: hidden;
+        cursor: crosshair;
+      }
+      
+      .noise-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 100;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+        opacity: 0.15;
+        mix-blend-mode: overlay;
+      }
+
+      .vignette {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;
+        pointer-events: none;
+        z-index: 90;
+      }
+      
+      /* Hide standard scrollbars */
+      ::-webkit-scrollbar {
+        width: 0px; 
+        background: transparent; 
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.35.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <div class="noise-overlay"></div>
+    <div class="vignette"></div>
+  </body>
+</html>
