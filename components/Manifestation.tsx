@@ -408,7 +408,7 @@ export const Manifestation: React.FC<ManifestationProps> = ({ fragment, onClose,
                  )}
 
                  {/* Full Poem Accordion */}
-                 <div className={`transition-all duration-1000 overflow-hidden ${showFull ? 'max-h-[5000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                 <div className={`transition-all duration-1000 overflow-hidden ${showFull ? 'max-h-[30000px] opacity-100' : 'max-h-0 opacity-0'}`}>
                     <div className="grid grid-cols-1 gap-16">
                         {content.map((block, idx) => (
                             <div key={idx} className="relative bg-black/20 p-8 md:p-12 rounded-lg border-l-4 border-indigo-500/40 hover:border-indigo-400 transition-colors">
