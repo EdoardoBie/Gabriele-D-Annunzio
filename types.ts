@@ -21,6 +21,7 @@ export interface Fragment {
   era?: string; // New: Chronological Era label
   // Rich content support
   content?: string | string[]; // String for fragments, array for stanzas
+  summary?: string; // NEW: Short explanation for Presentation Mode
   meta?: string; // Year, Location, or Subtitle
   image?: string;
   details?: {
